@@ -6,7 +6,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        int sortMode = 0;
+        int sortMode;
 
         System.out.printf("Datenanzeige:%n-------------%n");
 
