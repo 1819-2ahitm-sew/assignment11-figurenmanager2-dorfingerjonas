@@ -38,7 +38,7 @@ public class Main {
                 break;
             case 2: sortArea(figureList);
                 break;
-            case 3: deleteFigures();
+            case 3: deleteFigures(figureList);
                 break;
             case 4: printFigures(figureList);
                 break;
@@ -52,8 +52,15 @@ public class Main {
         System.out.println("Auf Wiedersehen!");
     }
 
-    private static void deleteFigures() {
+    private static void deleteFigures(List<Figure> figureList) {
+        Scanner scanner = new Scanner(System.in);
+        int index;
 
+        System.out.println();
+        System.out.println("Index of Figure");
+        index = scanner.nextInt();
+        System.out.println();
+        figureList.remove(index);
     }
 
     private static void newFigure(List<Figure> figureList) {
