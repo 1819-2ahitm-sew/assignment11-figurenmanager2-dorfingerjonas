@@ -5,5 +5,4 @@ public abstract class Figure {
     abstract public double circumference();
 
     abstract public String output();
-
 }

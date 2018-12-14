@@ -1,4 +1,4 @@
-public class Circle extends Figure{
+public class Circle extends Figure implements Comparable<Circle>{
 
     double radius;
 
@@ -21,5 +21,8 @@ public class Circle extends Figure{
     @Override
     public String output() {
         return "Kreis mit Radius " + radius + ": Fläche -> " + area() + ", Umfang -> " + circumference() + "";
+    }
+    public int compareTo(Circle circle) {
+        return circumference() > circle.circumference() ? 1 : circumference() < circle.circumference() ? -1 : 0;
     }
 }
