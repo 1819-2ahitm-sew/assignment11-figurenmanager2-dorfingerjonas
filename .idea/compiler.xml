@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Figurenmanager2" />
+        <module name="figurenmanager2" />
       </profile>
     </annotationProcessing>
   </component>
