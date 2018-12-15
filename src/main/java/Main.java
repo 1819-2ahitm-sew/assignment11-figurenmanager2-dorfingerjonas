@@ -8,7 +8,7 @@ public class Main {
 
         int sortMode;
 
-        System.out.printf("Datenanzeige:%n-------------%n");
+        System.out.printf("Figurenmanager 2:%n-----------------%n");
 
         List<Figure> figureList = new ArrayList<Figure>();
 
@@ -16,8 +16,7 @@ public class Main {
             printMenu();
             sortMode = scanner.nextInt();
             run(sortMode,figureList);
-        } while (sortMode != 5);
-
+        } while (sortMode != 6);
     }
 
     private static void printMenu() {
@@ -26,8 +25,9 @@ public class Main {
         System.out.println("2 - sortArea");
         System.out.println("3 - deleteFigure");
         System.out.println("4 - printFigures");
-        System.out.println("5 - Quit");
-        System.out.println("================");
+        System.out.println("5 - countInstances");
+        System.out.println("6 - Quit");
+        System.out.println("=====================");
     }
 
     private static void run(int sortMode, List<Figure> figureList) {
@@ -42,9 +42,58 @@ public class Main {
                 break;
             case 4: printFigures(figureList);
                 break;
-            case 5: quit();
+            case 5: countInstances(figureList);
+                break;
+            case 6: quit();
                 break;
             default: printErrMessage();
+        }
+    }
+
+    private static void countInstances(List<Figure> figureList) {
+        int circleCount = 0;
+        int rectCount = 0;
+        int squareCount = 0;
+        int ellipseCount = 0;
+
+        if (figureList.size() != 0) {
+            for (Figure figure : figureList) {
+                if (figure instanceof Circle) {
+                    circleCount++;
+                } else if (figure instanceof Rectangle) {
+                    rectCount++;
+                } else if (figure instanceof Square) {
+                    squareCount++;
+                } else if (figure instanceof Ellipse) {
+                    ellipseCount++;
+                }
+            }
+
+            if (rectCount == 1) {
+                System.out.println( rectCount + " Rechteck wurde erstellt!");
+            } else if (rectCount > 1){
+                System.out.println(rectCount + " Rechtecke wurden erstellt!");
+            }
+
+            if (squareCount == 1) {
+                System.out.println( squareCount + " Quadrat wurde erstellt!");
+            } else if (squareCount > 1){
+                System.out.println( squareCount + " Quadrate wurden erstellt!");
+            }
+
+            if (circleCount == 1) {
+                System.out.println( circleCount + " Kreis wurde erstellt!");
+            } else if (circleCount > 1){
+                System.out.println( circleCount + " Kreise wurden erstellt!");
+            }
+
+            if (ellipseCount == 1) {
+                System.out.println( ellipseCount + " Ellipse wurde erstellt!");
+            } else if (ellipseCount > 1){
+                System.out.println( ellipseCount + " Ellipsen wurden erstellt!");
+            }
+        } else {
+            System.err.println("Es wurden noch keine Figuren erstellt!");
         }
     }
 
@@ -57,7 +106,7 @@ public class Main {
         int index;
 
         System.out.println();
-        System.out.println("Index of Figure");
+        System.out.println("Index of Figure:");
         index = scanner.nextInt();
         System.out.println();
         figureList.remove(index);
@@ -82,7 +131,7 @@ public class Main {
                 int width;
 
                 System.out.println("\nRechteck");
-                System.out.println("------------------------------------");
+                System.out.println("------------");
                 System.out.print("Länge: ");
                 length = scanner.nextInt();
                 System.out.print("Breite: ");
@@ -95,7 +144,7 @@ public class Main {
                 int side;
 
                 System.out.println("\nQuadrat");
-                System.out.println("------------------------------------");
+                System.out.println("------------");
                 System.out.print("Seitenlänge: ");
                 side = scanner.nextInt();
 
@@ -105,7 +154,7 @@ public class Main {
                 int radius;
 
                 System.out.println("\nKreis");
-                System.out.println("------------------------------------");
+                System.out.println("------------");
                 System.out.print("Radius: ");
                 radius = scanner.nextInt();
 
@@ -116,7 +165,7 @@ public class Main {
                 int secondaxis;
 
                 System.out.println("\nEllipse");
-                System.out.println("------------------------------------");
+                System.out.println("------------");
                 System.out.print("Hauptachse: ");
                 mainaxis = scanner.nextInt();
                 System.out.print("Nebenachse: ");
@@ -129,29 +178,30 @@ public class Main {
     }
 
     private static void printErrMessage() {
-        System.err.println("==================");
         System.err.println("Ungültige Eingabe!");
-        System.err.println("==================");
     }
 
     private static void printFigures(List<Figure> figureList) {
 
         CurrentMode cm = new CurrentMode();
 
-        if (!(cm.getCurrMode())) {
+        if (figureList.size() == 0) {
+            System.err.println("Es wurden noch keine Figuren erstellt!");
+        } else {
+            if (!(cm.getCurrMode())) {
 
-            List<String> sortedList = sortCircumference(figureList);
+                List<String> sortedList = sortCircumference(figureList);
 
-            for (String str : sortedList)
-                System.out.println(str);
-        } else if (cm.getCurrMode()) {
+                for (String str : sortedList)
+                    System.out.println(str);
+            } else if (cm.getCurrMode()) {
 
-            List<String> sortedList = sortArea(figureList);
+                List<String> sortedList = sortArea(figureList);
 
-            for (String str : sortedList)
-                System.out.println(str);
+                for (String str : sortedList)
+                    System.out.println(str);
+            }
         }
-
     }
 
     private static List<String> sortCircumference(List<Figure> figureList) {
