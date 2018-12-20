@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.List;
 
 public class Main {
 
@@ -15,7 +16,7 @@ public class Main {
         do {
             printMenu();
             sortMode = scanner.nextInt();
-            run(sortMode,figureList);
+            menuMethods(sortMode,figureList);
         } while (sortMode != 6);
     }
 
@@ -30,7 +31,7 @@ public class Main {
         System.out.println("=====================");
     }
 
-    private static void run(int sortMode, List<Figure> figureList) {
+    private static void menuMethods(int sortMode, List<Figure> figureList) {
         switch (sortMode) {
             case 0: newFigure(figureList);
                 break;
@@ -55,43 +56,46 @@ public class Main {
         int rectCount = 0;
         int squareCount = 0;
         int ellipseCount = 0;
+        int polygonCount = 0;
 
         if (figureList.size() != 0) {
             for (Figure figure : figureList) {
-                if (figure instanceof Circle) {
+                if (figure instanceof Circle)
                     circleCount++;
-                } else if (figure instanceof Rectangle) {
+                else if (figure instanceof Rectangle)
                     rectCount++;
-                } else if (figure instanceof Square) {
+                else if (figure instanceof Square)
                     squareCount++;
-                } else if (figure instanceof Ellipse) {
+                else if (figure instanceof Ellipse)
                     ellipseCount++;
-                }
+                else if (figure instanceof Polygon)
+                    polygonCount++;
             }
 
-            if (rectCount == 1) {
+            if (rectCount == 1)
                 System.out.println( rectCount + " Rechteck wurde erstellt!");
-            } else if (rectCount > 1){
+            else if (rectCount > 1)
                 System.out.println(rectCount + " Rechtecke wurden erstellt!");
-            }
 
-            if (squareCount == 1) {
+            if (squareCount == 1)
                 System.out.println( squareCount + " Quadrat wurde erstellt!");
-            } else if (squareCount > 1){
+            else if (squareCount > 1)
                 System.out.println( squareCount + " Quadrate wurden erstellt!");
-            }
 
-            if (circleCount == 1) {
+            if (circleCount == 1)
                 System.out.println( circleCount + " Kreis wurde erstellt!");
-            } else if (circleCount > 1){
+            else if (circleCount > 1)
                 System.out.println( circleCount + " Kreise wurden erstellt!");
-            }
 
-            if (ellipseCount == 1) {
+            if (ellipseCount == 1)
                 System.out.println( ellipseCount + " Ellipse wurde erstellt!");
-            } else if (ellipseCount > 1){
+            else if (ellipseCount > 1)
                 System.out.println( ellipseCount + " Ellipsen wurden erstellt!");
-            }
+
+            if (polygonCount == 1)
+                System.out.println( polygonCount + " Polygon wurde erstellt!");
+            else if (polygonCount > 1)
+                System.out.println( polygonCount + " Polygone wurde erstellt!");
         } else {
             System.err.println("Es wurden noch keine Figuren erstellt!");
         }
@@ -122,6 +126,7 @@ public class Main {
         System.out.println("1 - Quadrat");
         System.out.println("2 - Circle");
         System.out.println("3 - Ellipse");
+        System.out.println("4 - Polygon");
         System.out.println("-------------");
         input = scanner.nextInt();
 
@@ -173,6 +178,39 @@ public class Main {
 
                 figureList.add(new Ellipse(mainaxis, secondaxis));
                 break;
+            case 4:
+                List<Float> x = new ArrayList<Float>();
+                List<Float> y = new ArrayList<Float>();
+
+                int counter = 1;
+                float xInput;
+                float yInput;
+
+                System.out.println("\nPolygon");
+                System.out.println("------------");
+                System.out.println("Geben Sie '-1' ein um die Eingabe abbzubrechen");
+                System.out.println();
+                do {
+                    System.out.print(counter + ". X Koordinate: ");
+                    xInput = scanner.nextFloat();
+
+                    System.out.print(counter + ". Y Koordinate: ");
+                    yInput = scanner.nextFloat();
+                    counter++;
+
+                    if (xInput != 0)
+                    x.add(xInput);
+                    System.out.println(x);
+
+                    if (yInput != 0)
+                        y.add(yInput);
+                    System.out.println(y);
+                } while (xInput == -1 || yInput == -1);
+
+                figureList.add(new Polygon(x, y));
+
+                break;
+
         }
         System.out.println();
     }
